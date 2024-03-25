@@ -2,7 +2,16 @@ const models = require('../models');
 const Domo = models.Domo;
 
 const makerPage = (req, res) => {
-    res.render('app');
+    try {
+        const query = { owner: req.session.account_id };
+        const docs = await Domo.find(query).select('name age').lean().exec();
+
+        return res.render('app', { domos: docs });
+    }
+    catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: 'Error retrieving domos!' });
+    }
 }
 
 const makeDomo = async (req, res) => {
