@@ -1,7 +1,7 @@
 const models = require('../models');
 const Domo = models.Domo;
 
-const makerPage = (req, res) => {
+const makerPage = async (req, res) => {
     try {
         const query = { owner: req.session.account_id };
         const docs = await Domo.find(query).select('name age').lean().exec();

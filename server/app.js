@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const expressHandlebars = require('express-handlebars');
 const helmet = require('helmet');
-const session = require('session');
+const session = require('express-session');
 
 const router = require('./router.js');
 
