@@ -25,10 +25,10 @@ mongoose.connect(dbURI).catch(((err) => {
 }));
 
 const redisClient = redis.createClient({
-  url: process.env.REDISCLOUD_URL
+  url: process.env.REDISCLOUD_URL,
 });
 
-redisClient.on('error', err => console.log('Redis Client Error', err));
+redisClient.on('error', (err) => console.log('Redis Client Error', err));
 
 redisClient.connect().then(() => {
   const app = express();
@@ -43,11 +43,11 @@ redisClient.connect().then(() => {
   app.use(session({
     key: 'sessionid',
     store: new RedisStore({
-      client: redisClient
+      client: redisClient,
     }),
     secret: 'Domo Arigato',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
   }));
 
   app.engine('handlebars', expressHandlebars.engine({ defaultLayout: '' }));
